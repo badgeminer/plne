@@ -1,0 +1,7 @@
+{
+  [ "launcher.last" ] = 1,
+  [ "launcher.names" ] = {
+    "Panel",
+    "AP Test 1",
+  },
+}

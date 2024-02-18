@@ -1,0 +1,62 @@
+{
+	"craftos-pc.additionalArguments": "",
+    //"craftos-pc.executablePath.all": "C:\\Users\\Ben\\phoenix\\craftospc\\CraftOS-PC_console.exe",
+	"files.associations": {
+		"*.b": "raw",
+		"*.savedmap": "code-text-binary",
+		"stdio.h": "c",
+		"prototype.sys.h": "c",
+		"os.h": "c",
+		"sys.h": "c"
+	},
+	"craftos-pc.dataPath": "C:\\Users\\Ben\\InfinitusOS",
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"type": "craftos-pc",
+				"request": "launch",
+				"name": "Debug CraftOS-PC"
+			}
+		]
+	},
+	"Lua.diagnostics.globals": [
+		"bit",
+		"colors",
+		"colours",
+		"commands",
+		"disk",
+		"fs",
+		"gps",
+		"help",
+		"http",
+		"keys",
+		"multishell",
+		"paintutils",
+		"parallel",
+		"peripheral",
+		"pocket",
+		"rednet",
+		"redstone",
+		"rs",
+		"settings",
+		"shell",
+		"term",
+		"textutils",
+		"turtle",
+		"vector",
+		"window",
+		"_CC_DEFAULT_SETTINGS",
+		"_HOST",
+		"printError",
+		"write",
+		"read",
+		"sleep",
+		"logs",
+		"syscall",
+		"sys",
+		"proc",
+		"_ENV"
+	],
+	"Lua.runtime.version": "LuaJIT"
+}

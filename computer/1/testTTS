@@ -1,0 +1,70 @@
+local chz = {}
+local chunks =0
+local speaker = peripheral.find("speaker")
+local smpl = (16 * 1024)
+local function callout(tx)
+    
+    local url = "https://music.madefor.cc/tts?text=" .. textutils.urlEncode(tx)
+    local response, err = http.get { url = url, binary = true }
+    if not response then error(err, 0) end
+    local prog = tonumber(response.getResponseHeaders()["Content-Length"])
+    
+    local decoder = require("cc.audio.dfpwm").make_decoder()
+
+    while true do
+        local chunk
+        if prog < smpl then
+            chunk = response.read(prog)
+        else
+            chunk = response.read(smpl)
+        end
+        if not chunk or #chunk <=0 then break end
+
+        prog = prog -#chunk
+        --print(#chunk)
+        --table.insert(chz,#chunk)
+        ----chz = chz +#chunk
+        --chunks =  chunks +1
+
+        local buffer = decoder(chunk)
+        while not speaker.playAudio(buffer) do
+            os.pullEvent("speaker_audio_empty")
+        end
+    end
+    os.pullEvent("speaker_audio_empty")
+    speaker.stop()
+end
+
+
+callout('FIRE ENGINE 1')
+
+
+local dfpwm = require("cc.audio.dfpwm")
+local Achz ={}
+
+--local decoder = dfpwm.make_decoder()
+--for chunk in io.lines("ttstest.dwfpm", smpl) do
+--    table.insert(Achz,#chunk)
+--    local buffer = decoder(chunk)
+--
+--    while not speaker.playAudio(buffer) do
+--        os.pullEvent("speaker_audio_empty")
+--    end
+--end
+
+local rows = {}
+for index, value in ipairs(chz) do
+    rows[index] = {tostring(index),tostring(value),tostring(Achz[index] or 0), tostring(value-(Achz[index] or 0)),tostring((smpl)-value)}
+end
+table.insert(rows,colors.red)
+for index, value in ipairs(Achz) do
+    table.insert(rows,{tostring(index),tostring(value),tostring(value), tostring((value-chz[index])),tostring((smpl)-value)})
+end
+textutils.tabulate(
+  colors.orange, { "chunks","Chunk", "actual", "diff","FromFull" },
+  colors.lightBlue, table.unpack(rows)
+)
+
+
+
+
