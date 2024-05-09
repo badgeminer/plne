@@ -17,7 +17,7 @@ colors.red_off = colors.brown
 colors.yellow_off = colors.magenta
 colors.green_off = colors.lime
 
-style.bw_fg_bg = cpair(colors.white, colors.gray)
+style.bw_fg_bg = cpair(colors.white, colors.darkGray)
 
 style.root = cpair(colors.black, colors.ivory)
 style.header = cpair(colors.white, colors.gray)
