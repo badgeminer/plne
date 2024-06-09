@@ -173,6 +173,62 @@ local function main()
     print("exited")
     log.info("exited")
 end
+local function wrap(periph)
+    return peripheral.wrap(periph)
+end
+local periphs = {}
+local config = setmetatable({
+    Digital = function(dig)
+        periphs[dig] = wrap(dig)
+    end,
+    Motor = function(bnd,mtr)
+        local MTR = wrap(mtr)
+        local m = {}
+        local M = {
+            Motors = {MTR},
+            Bearing= {},
+            
+        }
+        function M:setSpeed(rpm)
+            for index, m in ipairs(self.Motors) do
+                m.setSpeed(rpm)
+            end
+        end
+        function M:stop()
+            self:setSpeed(0)
+        end
+        function M:rotate(d,rpm)
+            self:setSpeed(rpm)
+            return mtr.rotate(d,rpm)
+        end
+
+        function m:Bearing(dig,dir)
+            function M.Bearing:angle()
+                return periphs[dig].getBearingAngle(dir)
+            end
+            function M.Bearing:rotateAbs(d,rpm)
+                self:setSpeed(rpm)
+                return mtr.rotate(M.Bearing:angle()-d,rpm)
+            end
+        end
+        function m:bind(Mtr)
+            table.insert(M,wrap(Mtr))
+        end
+        periphs[bnd] = M
+        return m
+    end
+},{__index=_ENV})
+local fn,err = loadfile("conect.lua","t",config)
+if not fn then
+    printError(err)
+    return
+end
+local ok,err = pcall(fn)
+if not ok then
+    printError(err)
+    return
+end
+
 databus.ps.subscribe("nlcd",function(v)
     nlcd = v
 end)
@@ -198,10 +254,12 @@ databus.ps.subscribe("tgl_gear",function(v)
         databus.ps.publish('gear',types.GEAR_STATE.DOWN)
         GEAR = types.GEAR_STATE.DOWN
         drop = false
+        periphs["Gear"].Bearing:rotateAbs(0,32)
     elseif (GEAR == types.GEAR_STATE.DOWN) then
         databus.ps.publish('gear',types.GEAR_STATE.UP)
         GEAR = types.GEAR_STATE.UP
         drop = false
+        periphs["Gear"].Bearing:rotateAbs(90,32)
     end
     
 end)
@@ -240,6 +298,7 @@ end,function()
         if REVR and GEAR == types.GEAR_STATE.DOWN then
             databus.ps.publish('gear',types.GEAR_STATE.LOCK)
             GEAR = types.GEAR_STATE.LOCK
+
         elseif REVR and GEAR == types.GEAR_STATE.UP then
             databus.ps.publish("warning",true)
         end

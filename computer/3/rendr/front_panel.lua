@@ -77,30 +77,15 @@ local function init(panel)
     local gear = RGBLED{parent=system,label="",colors={colors.red,colors.orange,colors.green,colors.cyan},y=2,x=15}
     local levels = LED{parent=system,label="",colors=ind_red,y=3,x=1}
     local controls = LED{parent=system,label="",colors=ind_grn,y=3,x=3}
-    local drop = LED{parent=system,label="",colors=ind_wht,y=3,x=5}
-    local nuke = LED{parent=system,label="",colors=cpair(colors.cyan,colors.green_off),y=3,x=7}
     local revrsr = LED{parent=system,label="",colors=ind_yllw,y=3,x=9}
     local estat = RGBLED{parent=system,label="",colors={colors.red,colors.orange,colors.green},y=3,x=11}
     
     local fuel_g = DataIndicator{parent=system,label="F",format="%10d",value=100000,unit="MB",lu_colors=lu_cpair,width=15,fg_bg=style.bw_fg_bg}
     local elec_g = DataIndicator{parent=system,label="E",format="%10d",value=100000,unit="FE",lu_colors=lu_cpair,width=15,fg_bg=style.bw_fg_bg}
+    local rounds_g = DataIndicator{parent=system,label="Rounds",format="%10d",value=100000,unit="",lu_colors=lu_cpair,width=15,fg_bg=style.bw_fg_bg}
+    local flares_g = DataIndicator{parent=system,label="Flares",format="%10d",value=100000,unit="",lu_colors=lu_cpair,width=15,fg_bg=style.bw_fg_bg}
     
 
-    local launchCode = SpinboxNumeric{parent=system,x=1,y=21,whole_num_precision=6,fractional_precision=0,min=0,max=999999,arrow_fg_bg=gry_wht,fg_bg=bw_fg_bg}
-    PushButton{
-        parent=system,x=7,y=22,min_width=3,
-        text="N",
-        callback=function()
-            databus.nuke(launchCode.get_value())
-        end,
-        fg_bg=cpair(colors.white,colors.red_off),active_fg_bg=cpair(colors.white,colors.red)
-    }
-    PushButton{
-        parent=system,x=7,y=23,min_width=3,
-        text="B",
-        callback=databus.bomb,
-        fg_bg=cpair(colors.white,colors.red_off),active_fg_bg=cpair(colors.white,colors.red)
-    }
     PushButton{
         parent=system,x=1,y=24,min_width=6,
         text="Gear",
@@ -120,7 +105,6 @@ local function init(panel)
         callback=databus.engn,
         fg_bg=cpair(colors.white,colors.yellow_off),active_fg_bg=cpair(colors.gray,colors.yellow_hc)
     }
-    nuke.update(true)
     revrsr.update(false)
 
     init_ok.update(false)
@@ -132,8 +116,6 @@ local function init(panel)
     cat.register(databus.ps, "caution", cat.update)
     wrn.register(databus.ps, "warning", wrn.update)
 
-    drop.register(databus.ps, "drop", drop.update)
-    nuke.register(databus.ps, "nuke", nuke.update)
     revrsr.register(databus.ps, "revrsr", revrsr.update)
 
 end
