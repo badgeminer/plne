@@ -62,8 +62,6 @@ end
 -- create new front panel view
 ---@param panel graphics_element main displaybox
 local function init(panel)
-
-
     local system = Div{parent=panel,width=14,height=24,x=1,y=1}
     local header = TextBox{parent=system,y=1,text="STATUS",alignment=ALIGN.CENTER,height=1,fg_bg=style.header}
     system.line_break()
@@ -181,7 +179,7 @@ local function init(panel)
     erpm2_p.register(databus.ps, "erpm2", erpm2_p.update)
     
 
-    local outFBND = Rectangle{parent=panel,width=2,height=24,x=57,y=1,border=border(1,colors.blue,true),even_inner=true,fg_bg=cpair(colors.blue,colors.blue)}
+    --local outFBND = Rectangle{parent=panel,width=2,height=24,x=57,y=1,border=border(1,colors.blue,true),even_inner=true,fg_bg=cpair(colors.blue,colors.blue)}
 
 
     databus.ps.subscribe('ef1',function(s)

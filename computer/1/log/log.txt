@@ -836,4 +836,27 @@
 [Sun Feb 18 09:11:07 2024] [DBG] startup> conn watchdog started
 [Sun Feb 18 09:11:12 2024] [INF] supervisor server timeout
 [Sun Feb 18 09:11:12 2024] [INF] coordinator api server timeout
-[Thu Feb 22 16:57:22 2024] [DBG] startup> conn watchdog started
+[Wed May  1 11:57:55 2024] [ERR] startup> GUI render failed with error /rendr/front_panel.lua:184{Rectangle}: frame width not >= 1
+[Wed May  1 11:57:55 2024] [INF] exited
+[Wed May  1 11:58:05 2024] [ERR] startup> GUI render failed with error /rendr/front_panel.lua:184{Rectangle}: frame width not >= 1
+[Wed May  1 11:58:05 2024] [INF] exited
+[Wed May  1 11:58:15 2024] [ERR] startup> GUI render failed with error /rendr/front_panel.lua:184{Rectangle}: frame width not >= 1
+[Wed May  1 11:58:15 2024] [INF] exited
+[Wed May  1 11:58:25 2024] [ERR] startup> GUI render failed with error /rendr/front_panel.lua:184{Rectangle}: frame width not >= 1
+[Wed May  1 11:58:25 2024] [INF] exited
+[Wed May  1 11:58:33 2024] [ERR] startup> GUI render failed with error /rendr/front_panel.lua:184{Rectangle}: frame width not >= 1
+[Wed May  1 11:58:33 2024] [INF] exited
+[Wed May  1 12:14:46 2024] [ERR] startup> GUI render failed with error /rendr/front_panel.lua:184{Rectangle}: frame width not >= 1
+[Wed May  1 12:14:46 2024] [INF] exited
+[Wed May  1 12:15:41 2024] [ERR] startup> GUI render failed with error /rendr/front_panel.lua:184{Rectangle}: frame width not >= 1
+[Wed May  1 12:15:41 2024] [INF] exited
+[Wed May  1 12:16:53 2024] [DBG] startup> conn watchdog started
+[Wed May  1 12:17:29 2024] [DBG] startup> conn watchdog started
+[Wed May  1 12:17:34 2024] [INF] supervisor server timeout
+[Wed May  1 12:17:34 2024] [INF] coordinator api server timeout
+[Wed May  1 12:17:46 2024] [INF] terminate requested, closing server connections...
+[Wed May  1 12:17:46 2024] [INF] connections closed
+[Wed May  1 12:17:46 2024] [INF] exited
+[Wed May  1 12:17:47 2024] [DBG] startup> conn watchdog started
+[Wed May  1 12:17:52 2024] [INF] supervisor server timeout
+[Wed May  1 12:17:52 2024] [INF] coordinator api server timeout
